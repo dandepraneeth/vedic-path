@@ -1,883 +1,551 @@
 <!DOCTYPE html>
 <html lang="te">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
-  <title>వేదిక్ పాత్</title>
+  <title>Vedic Path - Calendar & Pujas</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tiro+Telugu&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700&family=Tiro+Telugu&display=swap" rel="stylesheet">
 
   <style>
     body {
-      margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: #fff7ed;
+      background-color: #fff7ed;
     }
-
-    .navbar {
-      background: #7c2d12;
-      color: white;
-      padding: 18px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo i {
-      font-size: 42px;
-      color: #fdba74;
-    }
-
-    .language-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    .language-buttons button {
-      border: none;
-      padding: 10px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      background: #ea580c;
-      color: white;
-      transition: 0.3s;
-    }
-
-    .language-buttons button:hover {
-      background: #c2410c;
-    }
-
-    .hero {
-      padding: 80px 20px;
-      text-align: center;
-      background: linear-gradient(rgba(124, 45, 18, 0.9), rgba(124, 45, 18, 0.7)), url("images/temple-bg.jpg");
-      background-size: cover;
-      background-position: center;
-      color: white;
-    }
-
-    .hero h2 {
-      font-size: 48px;
-      margin-bottom: 15px;
+    .telugu-font {
       font-family: 'Tiro Telugu', serif;
     }
-
-    .section {
-      padding: 50px 20px;
-      max-width: 1300px;
-      margin: auto;
+    ::-webkit-scrollbar {
+      width: 6px;
     }
-
-    .section-title {
-      text-align: center;
-      font-size: 38px;
-      margin-bottom: 40px;
-      color: #9a3412;
-      font-family: 'Tiro Telugu', serif;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 3px;
+    ::-webkit-scrollbar-thumb {
       background: #ea580c;
-      border-radius: 2px;
-    }
-
-    .panchangam-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 25px;
-    }
-
-    .panchangam-card {
-      background: white;
-      padding: 30px;
-      border-radius: 24px;
-      text-align: center;
-      border: 1px solid #fed7aa;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    }
-
-    .panchangam-card h3 {
-      font-size: 24px;
-      color: #9a3412;
-      margin-bottom: 12px;
-      font-family: 'Tiro Telugu', serif;
-    }
-
-    .panchangam-card p {
-      font-size: 18px;
-      color: #444;
-      font-weight: 600;
-    }
-
-    .timing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .timing-card {
-      background: white;
-      border-left: 6px solid #16a34a;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid #fed7aa;
-    }
-
-    .timing-card.bad {
-      border-left-color: #dc2626;
-    }
-
-    .horoscope-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-    }
-
-    .horoscope-card {
-      background: white;
-      padding: 25px 15px;
-      border-radius: 24px;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.3s;
-      border: 1px solid #fed7aa;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-    }
-
-    .horoscope-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(234, 88, 12, 0.15);
-    }
-
-    .sign-icon {
-      font-size: 48px;
-      margin-bottom: 10px;
-      color: #c2410c;
-    }
-
-    .category-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-      background: #ffedd5;
-      padding: 12px;
-      border-radius: 20px;
-      border: 1px solid #fed7aa;
-    }
-
-    .category-btn {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 14px;
-      background: transparent;
-      color: #9a3412;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .category-btn.active {
-      background: #ea580c;
-      color: white;
-      box-shadow: 0 8px 16px rgba(234, 88, 12, 0.2);
-    }
-
-    .puja-list-container {
-      background: white;
-      border-radius: 24px;
-      padding: 30px;
-      border: 1px solid #fed7aa;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
-    }
-
-    .puja-item-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid #ffedd5;
-      transition: 0.2s;
-    }
-
-    .puja-item-row:last-child {
-      border-bottom: none;
-    }
-
-    .puja-item-row:hover {
-      background: #fff7ed;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .calendar-container {
-      background: white;
-      border: 1px solid #fed7aa;
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
-      margin-top: 40px;
-    }
-
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .calendar-days-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      text-align: center;
-    }
-
-    .calendar-day-name {
-      font-weight: 700;
-      color: #7c2d12;
-      font-size: 14px;
-    }
-
-    .calendar-cell {
-      padding: 12px 5px;
-      border-radius: 12px;
-      background: #fff7ed;
-      min-height: 75px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 1px solid #ffedd5;
-    }
-
-    .calendar-cell.today {
-      background: #ea580c;
-      color: white;
-    }
-
-    .calendar-cell.today .cell-lunar, .calendar-cell.today .cell-date {
-      color: white !important;
-    }
-
-    .cell-date {
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    .cell-lunar {
-      font-size: 11px;
-      color: #9a3412;
-    }
-
-    .contact-section {
-      background: #111827;
-      color: white;
-      padding: 70px 20px;
-      margin-top: 60px;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .contact-card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 30px;
-      border-radius: 24px;
-      text-align: center;
-      color: white;
-      text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: 0.3s;
-    }
-
-    .contact-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .contact-card i {
-      font-size: 40px;
-      margin-bottom: 15px;
-      color: #fdba74;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      background: white;
-      max-width: 600px;
-      width: 100%;
-      border-radius: 25px;
-      padding: 35px;
-      position: relative;
-    }
-
-    .close-btn {
-      position: absolute;
-      right: 20px;
-      top: 15px;
-      font-size: 35px;
-      cursor: pointer;
-      color: #9a3412;
+      border-radius: 10px;
     }
   </style>
 </head>
+<body class="text-gray-800 antialiased">
 
-<body>
-
-  <nav class="navbar">
-    <div class="logo">
-      <i class="fa-solid fa-om"></i>
+  <nav class="bg-[#7c2d12] text-white px-6 py-4 sticky top-0 z-50 shadow-md flex flex-wrap justify-between items-center gap-4">
+    <div class="flex items-center gap-3">
+      <i class="fa-solid fa-om text-4xl text-[#fdba74]"></i>
       <div>
-        <h1 class="text-2xl md:text-3xl" id="navTitle">వేదిక్ పాత్</h1>
-        <p class="text-xs md:text-sm" id="navSubtitle">జంగం బద్రయ్య ఆయగారు</p>
+        <h1 class="text-2xl font-bold telugu-font tracking-wide" id="navTitle">వేదిక్ పాత్</h1>
+        <p class="text-xs text-orange-200" id="navSubtitle">జంగం బద్రయ్య ఆయగారు</p>
       </div>
     </div>
-    <div class="language-buttons">
-      <button onclick="changeLanguage('te')">తెలుగు</button>
-      <button onclick="changeLanguage('en')">English</button>
-      <button onclick="changeLanguage('hi')">हिंदी</button>
+    <div class="flex gap-2">
+      <button onclick="handleLanguageSwitch('te', event)" id="lang-btn-te" class="lang-btn bg-[#ea580c] px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[#c2410c] transition shadow-sm">తెలుగు</button>
+      <button onclick="handleLanguageSwitch('en', event)" id="lang-btn-en" class="lang-btn bg-orange-800 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[#c2410c] transition shadow-sm">English</button>
+      <button onclick="handleLanguageSwitch('hi', event)" id="lang-btn-hi" class="lang-btn bg-orange-800 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[#c2410c] transition shadow-sm">हिंदी</button>
     </div>
   </nav>
 
-  <header class="hero">
-    <h2 id="heroTitle">శాస్త్రోక్త వేద సేవలు</h2>
-    <p class="text-lg md:text-xl font-light" id="heroText">తెలంగాణ ప్రాంతీయ పంచాంగం మరియు వైదిక పూజా సమాచారం</p>
+  <header class="relative bg-cover bg-center text-center py-20 px-4 shadow-inner overflow-hidden" style="background-image: url('temple-bg.jpg');">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#7c2d12]/90 to-[#9a3412]/85 backdrop-blur-[1px]"></div>
+    
+    <div class="relative z-10 max-w-3xl mx-auto space-y-3">
+      <h2 class="text-4xl md:text-5xl font-bold mb-3 telugu-font text-white drop-shadow-md" id="heroTitle">శాస్త్రోక్త వేద సేవలు</h2>
+      <p class="text-lg md:text-xl text-orange-100 max-w-2xl mx-auto font-light drop-shadow" id="heroText">తెలంగాణ ప్రాంతీయ క్యాలెండర్ మరియు వైదిక పూజా సమాచారం</p>
+    </div>
   </header>
 
-  <main>
-    <section class="section" aria-labelledby="panchangHeading">
-      <h2 id="panchangHeading" class="section-title">ఈరోజు పంచాంగం</h2>
+  <main class="max-w-7xl mx-auto px-4 py-10 space-y-12">
+
+    <section aria-labelledby="calendarHeading" class="bg-white rounded-3xl border border-orange-200 p-6 md:p-8 shadow-sm space-y-8">
       
-      <div class="panchangam-grid">
-        <div class="panchangam-card">
-          <h3 id="tithiHeading">తిథి</h3>
-          <p id="tithi" class="text-orange-600 font-bold text-xl">Loading...</p>
+      <div class="text-center">
+        <h2 id="calendarHeading" class="text-3xl font-bold text-[#9a3412] telugu-font inline-block border-b-4 border-[#ea580c] pb-2">క్యాలెండర్ & పండుగలు</h2>
+      </div>
+
+      <div class="bg-gradient-to-r from-orange-500 to-amber-600 rounded-2xl p-6 text-white shadow-md">
+        <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="bg-white/20 p-3 rounded-xl">
+              <i class="fa-solid fa-calendar-day text-2xl"></i>
+            </div>
+            <div>
+              <h4 id="quickDayBadge" class="text-xs uppercase font-bold tracking-widest text-orange-100">నేటి వివరణ</h4>
+              <h3 id="quickDayTitle" class="text-2xl font-bold telugu-font">..</h3>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="stepActiveDay(-1)" class="bg-white/20 hover:bg-white/30 text-white font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1">
+              <i class="fa-solid fa-arrow-left"></i> <span id="lblPrev">వెనుకకు</span>
+            </button>
+            <button onclick="resetToToday()" class="bg-white text-orange-700 font-bold px-4 py-2 rounded-xl text-xs transition shadow-sm hover:bg-orange-50">
+              <span id="lblTodayBtn">నేడు</span>
+            </button>
+            <button onclick="stepActiveDay(1)" class="bg-white/20 hover:bg-white/30 text-white font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1">
+              <span id="lblNext">ముందుకు</span> <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
-        <div class="panchangam-card">
-          <h3 id="nakshatraHeading">నక్షత్రం</h3>
-          <p id="nakshatram" class="text-orange-600 font-bold text-xl">Loading...</p>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-4 text-sm">
+          <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+            <span class="text-orange-100 block text-xs" id="lblSunrise">సూర్యోదయం</span>
+            <span class="font-bold text-base" id="valSunrise">..</span>
+          </div>
+          <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+            <span class="text-orange-100 block text-xs" id="lblSunset">సూర్యాస్తమయం</span>
+            <span class="font-bold text-base" id="valSunset">..</span>
+          </div>
+          <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+            <span class="text-orange-100 block text-xs" id="lblTithi">తిథి</span>
+            <span class="font-bold text-base telugu-font" id="valTithi">..</span>
+          </div>
+          <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+            <span class="text-orange-100 block text-xs" id="lblNakshatra">నక్షత్రం</span>
+            <span class="font-bold text-base telugu-font" id="valNakshatra">..</span>
+          </div>
+          <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+            <span class="text-orange-100 block text-xs" id="lblRahu">రాహుకాలం</span>
+            <span class="font-bold text-sm" id="valRahu">..</span>
+          </div>
+          <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+            <span class="text-orange-100 block text-xs" id="lblYama">యమగండం</span>
+            <span class="font-bold text-sm" id="valYama">..</span>
+          </div>
         </div>
-        <div class="panchangam-card">
-          <h3 id="sunriseHeading">సూర్యోదయం</h3>
-          <p id="sunrise" class="text-xl text-gray-700">05:44 AM</p>
-        </div>
-        <div class="panchangam-card">
-          <h3 id="sunsetHeading">సూర్యాస్తమయం</h3>
-          <p id="sunset" class="text-xl text-gray-700">06:39 PM</p>
+
+        <div class="bg-black/10 border border-white/10 p-4 rounded-xl">
+          <p id="quickDayDetails" class="text-base font-medium leading-relaxed tracking-wide"></p>
         </div>
       </div>
 
-      <div class="timing-grid">
-        <div class="timing-card">
-          <div>
-            <h4 class="font-bold text-gray-700" id="shubhaMuhurthamHeading">శుభ ముహూర్తం</h4>
-            <p class="text-green-600 font-semibold" id="shubhaValue">09:12 AM - 10:48 AM</p>
-          </div>
-          <i class="fa-solid fa-circle-check text-green-500 text-2xl"></i>
-        </div>
-        <div class="timing-card bad">
-          <div>
-            <h4 class="font-bold text-gray-700" id="rahuHeading">రాహుకాలం</h4>
-            <p class="text-red-500 font-semibold" id="rahuValue">05:32 PM - 07:11 PM</p>
-          </div>
-          <i class="fa-solid fa-triangle-exclamation text-red-400 text-2xl"></i>
-        </div>
-        <div class="timing-card bad">
-          <div>
-            <h4 class="font-bold text-gray-700" id="durmuhurthamHeading">దుర్ముహూర్తం</h4>
-            <p class="text-red-600 font-semibold" id="durValue">12:44 PM - 01:34 PM</p>
-          </div>
-          <i class="fa-solid fa-circle-xmark text-red-500 text-2xl"></i>
-        </div>
-        <div class="timing-card bad">
-          <div>
-            <h4 class="font-bold text-gray-700" id="yamagandamHeading">యమగండం</h4>
-            <p class="text-red-500 font-semibold" id="yamValue">07:30 AM - 09:05 AM</p>
-          </div>
-          <i class="fa-solid fa-hourglass-half text-red-400 text-2xl"></i>
-        </div>
+      <div class="flex justify-between items-center bg-orange-50 p-4 rounded-2xl border border-orange-100">
+        <button onclick="moveMonth(-1)" class="bg-[#ea580c] text-white px-4 py-2 rounded-xl hover:bg-[#c2410c] transition shadow-sm"><i class="fa-solid fa-chevron-left"></i></button>
+        <h3 id="calendarMonthTitle" class="text-2xl font-bold text-orange-950 tracking-wide telugu-font">..</h3>
+        <button onclick="moveMonth(1)" class="bg-[#ea580c] text-white px-4 py-2 rounded-xl hover:bg-[#c2410c] transition shadow-sm"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
 
-      <div class="calendar-container">
-        <div class="calendar-header">
-          <button onclick="moveMonth(-1)" class="bg-orange-600 text-white px-3 py-1 rounded-xl"><i class="fa-solid fa-chevron-left"></i></button>
-          <h2 id="calendarMonthTitle" class="text-xl font-bold text-orange-950">May 2026</h2>
-          <button onclick="moveMonth(1)" class="bg-orange-600 text-white px-3 py-1 rounded-xl"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
-        <div class="calendar-days-grid" id="calendarGrid"></div>
-      </div>
+      <div class="grid grid-cols-7 gap-2 md:gap-4 text-center" id="calendarGrid"></div>
     </section>
 
-    <section class="section" aria-labelledby="horoscopeHeading">
-      <h2 id="horoscopeHeading" class="section-title">నేటి రాశి ఫలాలు</h2>
-      <div id="horoscopeGrid" class="horoscope-grid"></div>
-    </section>
-
-    <section class="section" aria-labelledby="pujasTabHeading">
-  <h2 id="pujasTabHeading" class="section-title">వైదిక పూజా కార్యక్రమాలు</h2>
+    <section aria-labelledby="pujasTabHeading" class="bg-white rounded-3xl border border-orange-200 p-6 md:p-8 shadow-sm">
+      <div class="text-center mb-8">
+        <h2 id="pujasTabHeading" class="text-3xl font-bold text-[#9a3412] telugu-font inline-block border-b-4 border-[#ea580c] pb-2">వైదిక పూజా కార్యక్రమాలు</h2>
+      </div>
       
-      <div class="category-buttons" role="tablist">
-        <button id="btn-pujas" class="category-btn active" onclick="switchPujaTab('pujas')">శుభ పూజలు & వ్రతాలు</button>
-        <button id="btn-homas" class="category-btn" onclick="switchPujaTab('homas')">హోమాలు & అభిషేకాలు</button>
-        <button id="btn-navarathris" class="category-btn" onclick="switchPujaTab('navarathris')">నవరాత్రి ఉత్సవాలు</button>
-        <button id="btn-vastu" class="category-btn" onclick="switchPujaTab('vastu')">వాస్తు పూజలు</button>
-        <button id="btn-shanti" class="category-btn" onclick="switchPujaTab('shanti')">శాంతి / పితృకార్యాలు</button>
-        <button id="btn-samskaras" class="category-btn" onclick="switchPujaTab('samskaras')">సంస్కారాలు & కర్మలు</button>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 bg-orange-50 p-3 rounded-2xl border border-orange-100 mb-8" role="tablist">
+        <button id="btn-pujas" class="py-3 px-2 rounded-xl font-medium text-sm text-[#9a3412] transition-all duration-200 bg-[#ea580c] text-white shadow-sm" onclick="switchPujaTab('pujas')">..</button>
+        <button id="btn-homas" class="py-3 px-2 rounded-xl font-medium text-sm text-[#9a3412] transition-all duration-200 hover:bg-orange-100" onclick="switchPujaTab('homas')">..</button>
+        <button id="btn-navarathris" class="py-3 px-2 rounded-xl font-medium text-sm text-[#9a3412] transition-all duration-200 hover:bg-orange-100" onclick="switchPujaTab('navarathris')">..</button>
+        <button id="btn-vastu" class="py-3 px-2 rounded-xl font-medium text-sm text-[#9a3412] transition-all duration-200 hover:bg-orange-100" onclick="switchPujaTab('vastu')">..</button>
+        <button id="btn-shanti" class="py-3 px-2 rounded-xl font-medium text-sm text-[#9a3412] transition-all duration-200 hover:bg-orange-100" onclick="switchPujaTab('shanti')">..</button>
+        <button id="btn-samskaras" class="py-3 px-2 rounded-xl font-medium text-sm text-[#9a3412] transition-all duration-200 hover:bg-orange-100" onclick="switchPujaTab('samskaras')">..</button>
       </div>
 
-      <div class="puja-list-container">
-        <div id="pujaDynamicList"></div>
-      </div>
+      <div id="pujaDynamicList" class="divide-y divide-orange-100"></div>
     </section>
   </main>
 
-  <footer class="contact-section">
-    <h2 id="contactHeading" class="section-title text-white">సంప్రదించండి</h2>
-    <div class="contact-grid">
-      <a href="tel:+91 will update soon" class="contact-card">
-        <i class="fa-solid fa-phone"></i>
-        <h3 class="text-xl font-bold mb-1" id="callText">ఫోన్ చేయండి</h3>
-        <p class="text-orange-300 font-medium">+91 Will update soon</p>
-      </a>
-      <a href="https://wa.me/ will update soon" target="_blank" class="contact-card">
-        <i class="fa-brands fa-whatsapp"></i>
-        <h3 class="text-xl font-bold mb-1" id="whatsappText">వాట్సాప్ సందేశం</h3>
-        <p class="text-emerald-400 font-medium">+91 Will update soon</p>
-      </a>
-      <div class="contact-card">
-        <i class="fa-solid fa-location-dot"></i>
-        <h3 class="text-xl font-bold mb-1" id="locationText">చిరునామా</h3>
-        <p class="text-gray-300 text-sm" id="locationValue">వరంగల్, తెలంగాణ (దక్షిణ భారతదేశం)</p>
+  <footer class="bg-gray-900 text-white pt-12 pb-8 px-4 mt-20 border-t-4 border-[#ea580c]">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-10">
+      <div class="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 hover:border-orange-500/50 transition">
+        <i class="fa-solid fa-phone text-3xl text-[#fdba74] mb-3"></i>
+        <h3 class="text-lg font-bold mb-1" id="callText">ఫోన్ చేయండి</h3>
+        <p class="text-orange-300 font-semibold text-lg">+91 9999999999</p>
       </div>
+      <div class="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 hover:border-[#ea580c]/50 transition">
+        <i class="fa-brands fa-whatsapp text-3xl text-emerald-400 mb-3"></i>
+        <h3 class="text-lg font-bold mb-1" id="whatsappText">వాట్సాప్ సందేశం</h3>
+        <p class="text-emerald-400 font-semibold text-lg">+91 9999999999</p>
+      </div>
+      <div class="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 hover:border-orange-500/50 transition">
+        <i class="fa-solid fa-location-dot text-3xl text-orange-400 mb-3"></i>
+        <h3 class="text-lg font-bold mb-1" id="locationText">చిరునామా</h3>
+        <p class="text-gray-300 text-sm tracking-wide" id="locationValue">వరంగల్, తెలంగాణ</p>
+      </div>
+    </div>
+    <div class="text-center text-xs text-gray-500 tracking-wider">
+      &copy; 2026 వేదిక్ పాత్. All Rights Reserved.
     </div>
   </footer>
 
-  <div id="horoscopeModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2 id="modalTitle" class="text-2xl font-bold text-orange-900 mb-4"></h2>
-      <p id="modalText" class="text-gray-700 leading-relaxed font-medium"></p>
-    </div>
-  </div>
-
   <script>
     let currentLanguage = "te";
-    let calendarDate = new Date(2026, 4, 17); // Tied to May 17, 2026
+    
+    let todayInstance = new Date();
+    let activeDatePointer = new Date(todayInstance.getFullYear(), todayInstance.getMonth(), todayInstance.getDate());
+    let calendarMonthPointer = new Date(todayInstance.getFullYear(), todayInstance.getMonth(), 1);
     let activeTab = "pujas";
 
-    const signs = [
-  { icon: "🐏", te: "మేషం", en: "Aries", hi: "मेष" },
-  { icon: "🐂", te: "వృషభం", en: "Taurus", hi: "वृषभ" },
-  { icon: "👩‍❤️‍👨", te: "మిథునం", en: "Gemini", hi: "मिथुन" },
-  { icon: "🦀", te: "కర్కాటకం", en: "Cancer", hi: "कर्क" },
-  { icon: "🦁", te: "సింహం", en: "Leo", hi: "सिंह" },
-  { icon: "👩‍💼", te: "కన్య", en: "Virgo", hi: "कन्या" },
-  { icon: "⚖️", te: "తుల", en: "Libra", hi: "तुला" },
-  { icon: "🦂", te: "వృశ్చికం", en: "Scorpio", hi: "वृश्चिक" },
-  { icon: "🏹", te: "ధనుస్సు", en: "Sagittarius", hi: "धनु" },
-  { icon: "౿", te: "మకరం", en: "Capricorn", hi: "मकर" },
-  { icon: "⚱️", te: "కుంభం", en: "Aquarius", hi: "कुंभ" },
-  { icon: "🐟", te: "మీనం", en: "Pisces", hi: "मीन" }
-];
-
-    const kalpataruvuPujaList = [
-      { id: "p1", category: "pujas", name_te: "శ్రీ సత్యనారాయణ స్వామి వ్రతం", name_hi: "श्री सत्यनारायण व्रत", name_en: "Sri Satyanarayana Swamy Vratam" },
-      { id: "p2", category: "pujas", name_te: "శ్రీ మహాలక్ష్మి పూజ", name_hi: "श्री महालक्ष्मी पूजा", name_en: "Sri Maha Lakshmi Puja" },
-      { id: "p3", category: "pujas", name_te: "శ్రీ వినాయక చవితి పూజ", name_hi: "श्री गणेश चतुर्थी पूजा", name_en: "Sri Vinayaka Chavithi Puja" },
-      { id: "p4", category: "pujas", name_te: "మంగళగౌరి వ్రతం", name_hi: "मंगला गौरी व्रत", name_en: "Mangala Gowri Vratam" },
-      { id: "p5", category: "pujas", name_te: "వరలక్ష్మి వ్రతం", name_hi: "वरलक्ष्मी व्रत", name_en: "Varalakshmi Vratam" },
-      { id: "p6", category: "pujas", name_te: "అనంత పద్మనాభ స్వామి వ్రతం", name_hi: "अनंत पद्मनाभ व्रत", name_en: "Ananta Padmanabha Swamy Vratam" },
-      { id: "p7", category: "pujas", name_te: "కేదారేశ్వర వ్రతం (నోము)", name_hi: "केदारेश्वर व्रत", name_en: "Kedareswara Vratam" },
-      { id: "p8", category: "pujas", name_te: "శ్రీ రామ నవమి కళ్యాణోత్సవం", name_hi: "श्री राम नवमी पूजा", name_en: "Sri Rama Navami Kalyanotsavam" },
-      { id: "p9", category: "pujas", name_te: "శ్రీ కృష్ణ జన్మాష్టమి పూజ", name_hi: "श्री कृष्ण जन्माष्टमी पूजा", name_en: "Sri Krishna Janmashtami Puja" },
-      { id: "p10", category: "pujas", name_te: "సరస్వతీ పూజ (అక్షరాభ్యాసం)", name_hi: "सरस्वती पूजा", name_en: "Saraswathi Puja / Aksharabhyasam" },
-
-      { id: "h1", category: "homas", name_te: "శ్రీ గణపతి హోమం", name_hi: "श्री गणपति होमम", name_en: "Sri Ganapathi Homam" },
-      { id: "h2", category: "homas", name_te: "లక్ష్మీ కుబేర హోమం", name_hi: "लक्ष्मी कुबेर होमम", name_en: "Lakshmi Kubera Homam" },
-      { id: "h3", category: "homas", name_te: "రుద్ర హోమం / ఏకాదశ రుద్ర హోమం", name_hi: "रुद्र होमम", name_en: "Rudra Homam / Ekadasa Rudra Homam" },
-      { id: "h4", category: "homas", name_te: "మృత్యుంజయ హోమం", name_hi: "महामृत्युंजय होमम", name_en: "Mrityunjaya Homam" },
-      { id: "h5", category: "homas", name_te: "సుదర్శన హోమం", name_hi: "सुदर्शन होमम", name_en: "Sudarshana Homam" },
-      { id: "h6", category: "homas", name_te: "చండీ హోమం", name_hi: "चंडी होमम", name_en: "Chandi Homam" },
-      { id: "h7", category: "homas", name_te: "గాయత్రీ హోమం", name_hi: "गायत्री होमम", name_en: "Gayatri Homam" },
-      { id: "h8", category: "homas", name_te: "సంతాన గోపాలకృష్ణ హోమం", name_hi: "संतान गोपाल होमम", name_en: "Santana Gopala Krishna Homam" },
-      { id: "h9", category: "homas", name_te: "ఆయుష్య హోమం", name_hi: "आयुष्य होमम", name_en: "Ayushya Homam" },
-      { id: "h10", category: "homas", name_te: "కార్తీక సోమవార రుద్రాభిషేకం", name_hi: "कार्तिक सोमवार रुद्राभिषेक", name_en: "Karthika Somavara Rudrabhishekam" },
-      { id: "h11", category: "homas", name_te: "శ్రీ ప్రదోష కాల శివాభిషేకం", name_hi: "प्रदोष काल शिव अभिषेक", name_en: "Sri Pradosha Kala Shivabhishekam" },
-      { id: "h12", category: "homas", name_te: "శ్రీ సత్యనారాయణ స్వామి మూలమంత్ర హోమం", name_hi: "सत्यनारायण मूलमंत्र होमम", name_en: "Sri Satyanarayana Swamy Moola Mantra Homam" },
-
-      { id: "n1", category: "navarathris", name_te: "శరన్నవరాత్రి దుర్గాపూజ (9 రోజులు)", name_hi: "शारदीय नवरात्रि दुर्गा पूजा", name_en: "Sharad Navaratri Durga Puja (9 Days)" },
-      { id: "n2", category: "navarathris", name_te: "వాసంతిక నవరాత్రులు", name_hi: "वासंतिक नवरात्रि", name_en: "Vasantika Navaratri" },
-      { id: "n3", category: "navarathris", name_te: "శ్రీ లలితా త్రిపుర సుందరి దేవి నవాహ్నిక పూజ", name_hi: "ललिता तीव्रता सुंदरी पूजा", name_en: "Sri Lalitha Tripura Sundari Devi Navahnika Puja" },
-      { id: "n4", category: "navarathris", name_te: "కుమారీ పూజ / సుహాసిని పూజ", name_hi: "कुमारी पूजा / सुहासिनी पूजा", name_en: "Kumari Puja / Suhasini Puja" },
-      { id: "n5", category: "navarathris", name_te: "విజయదశమి శమీ పూజ (ఆయుధ పూజ)", name_hi: "विजयादशमी शमी पूजा", name_en: "Vijayadasami Shami Puja / Ayudha Puja" },
-
-      { id: "v1", category: "vastu", name_te: "గృహప్రవేశం (నూతన ఇల్లు)", name_hi: "गृह प्रवेश पूजा", name_en: "Gruhapravesam (House Warming)" },
-      { id: "v2", category: "vastu", name_te: "శ్రీ వాస్తు పురుష పూజ & హోమం", name_hi: "वास्तु पुरुष पूजा और होमम", name_en: "Sri Vastu Purusha Puja & Homam" },
-      { id: "v3", category: "vastu", name_te: "శంకుస్థాపన పూజ (భూమి పూజ)", name_hi: "शंकुस्थापना / भूमि पूजा", name_en: "Shankusthapana / Bhumi Puja" },
-      { id: "v4", category: "vastu", name_te: "ద్వార బంధన పూజ (సింహద్వారం)", name_hi: "द्वार बंधन पूजा", name_en: "Dwara Bandhana Puja (Main Door Frame)" },
-      { id: "v5", category: "vastu", name_te: "నవగ్రహ వాస్తు శాంతి హోమం", name_hi: "नवग्रह वास्तु शांति होमम", name_en: "Navagraha Vastu Shanthi Homam" },
-
-      { id: "sh1", category: "shanti", name_te: "నవగ్రహ హోమం (గ్రహ దోష శాంతి)", name_hi: "नवग्रह शांति होमम", name_en: "Navagraha Homam (Graha Dosha Shanthi)" },
-      { id: "sh2", category: "shanti", name_te: "శ్రీ కాలసర్ప దోష శాంతి పూజ", name_hi: "कालसर्प दोष शांति पूजा", name_en: "Sri Kalsarpa Dosha Shanthi Puja" },
-      { id: "sh3", category: "shanti", name_te: "రాహు కేతు సర్ప సూక్త జప శాంతి", name_hi: "राहु केतु शांति जप", name_en: "Rahu Ketu Sarpa Sukta Japa Shanthi" },
-      { id: "sh4", category: "shanti", name_te: "మహాలయ పక్ష పితృ తర్పణాలు", name_hi: "महालया पित्र तर्पण", name_en: "Mahalaya Paksha Pitru Tarpanam" },
-      { id: "sh5", category: "shanti", name_te: "శ్రాద్ధ కర్మలు / ఆబ్దికం (పితృకార్యాలు)", name_hi: "श्राद्ध कर्म / आब्दिकम", name_en: "Shraddha Karmalu / Abdhikam" },
-      { id: "sh6", category: "shanti", name_te: "నారాయణ బలి పూజ", name_hi: "नारायण बलि पूजा", name_en: "Narayana Bali Puja" },
-      { id: "sh7", category: "shanti", name_te: "తిల హోమం (పితృ దోష నివారణ)", name_hi: "तिल होमम", name_en: "Tila Homam (Pitru Dosha Nivarana)" },
-
-      { id: "s1", category: "samskaras", name_te: "గర్భాధానం / సీమంతం", name_hi: "सीमंतोन्नयन संस्कार", name_en: "Garbadhanam / Seemantham" },
-      { id: "s2", category: "samskaras", name_te: "నామकरणం (బారసాల)", name_hi: "नामकरण संस्कार", name_en: "Namakaranam (Naming Ceremony)" },
-      { id: "s3", category: "samskaras", name_te: "అన్నప్రాశన", name_hi: "अन्नप्राशन संस्कार", name_en: "Annaprasana (First Feeding)" },
-      { id: "s4", category: "samskaras", name_te: "చౌలం (పుట్టువెంట్రుకలు తీయుట)", name_hi: "मुंडन संस्कार", name_en: "Chaulam (Mundan Ceremony)" },
-      { id: "s5", category: "samskaras", name_te: "ఉపనయనం (వడుగు)", name_hi: "उपनयन संस्कार", name_en: "Upanayanam (Thread Ceremony)" },
-      { id: "s6", category: "samskaras", name_te: "వివాహ మహోత్సవం (పెళ్లి)", name_hi: "विवाह संस्कार", name_en: "Vivaha Mahotsavam (Marriage)" },
-      { id: "s7", category: "samskaras", name_te: "షష్టిపూర్తి (60 ఏళ్ళ పండుగ)", name_hi: "षष्टिपूर्ति उत्सव", name_en: "Shashtipoorthi (60th Birthday)" },
-      { id: "s8", category: "samskaras", name_te: "సత్యనారాయణ వ్రత సహిత ఉగ్రరథ శాంతి (70 ఏళ్ళ పండుగ)", name_hi: "उग्ररथ शांति पूजा", name_en: "Ugraratha Shanthi (70th Birthday)" },
-      { id: "s9", category: "samskaras", name_te: "సహస్ర చంద్ర దర్శన శాంతి (80 ఏళ్ళ పండుగ)", name_hi: "सहस्र चंद्र दर्शन शांति", name_en: "Sahasra Chandra Darshana Shanthi" }
+    // Dynamic Engine Sequence Arrays
+    const tithiSequence = [
+      { te: "శుక్ల పాడ్యమి", en: "Shukla Prathama", hi: "शुक्ल प्रतिपदा" },
+      { te: "శుక్ల విదియ", en: "Shukla Dwitiya", hi: "शुक्ल द्वितीया" },
+      { te: "శుక్ల తదియ", en: "Shukla Tritiya", hi: "शुक्ल तृतीया" },
+      { te: "శుక్ల చతుర్థి", en: "Shukla Chaturthi", hi: "शुक्ल चतुर्थी" },
+      { te: "శుక్ల పంచమి", en: "Shukla Panchami", hi: "शुक्ल पंचमी" },
+      { te: "శుక్ల షష్ఠి", en: "Shukla Shashthi", hi: "शुक्ल षष्ठी" },
+      { te: "శుక్ల సప్తమి", en: "Shukla Saptami", hi: "शुक्ल सप्तमी" },
+      { te: "శుక్ల అష్టమి", en: "Shukla Ashtami", hi: "शुक्ल अष्टमी" },
+      { te: "శుక్ల నవమి", en: "Shukla Navami", hi: "शुक्ल नवमी" },
+      { te: "శుక్ల దశమి", en: "Shukla Dashami", hi: "शुक्ल दशमी" },
+      { te: "శుక్ల ఏకాదశి", en: "Shukla Ekadashi", hi: "शुक्ल एकादशी" },
+      { te: "శుక్ల ద్వాదశి", en: "Shukla Dwadashi", hi: "शुक्ल द्वादशी" },
+      { te: "శుక్ల త్రయోదశి", en: "Shukla Trayodashi", hi: "शुक्ल त्रयोदशी" },
+      { te: "శుక్ల చతుర్దశి", en: "Shukla Chaturdashi", hi: "शुक्ल चतुर्दशी" },
+      { te: "పౌర్ణమి 🌕", en: "Purnima 🌕", hi: "पूर्णिमा 🌕" },
+      { te: "కృష్ణ పాడ్యమి", en: "Krishna Prathama", hi: "कृष्ण प्रतिपदा" },
+      { te: "కృష్ణ విదియ", en: "Krishna Dwitiya", hi: "कृष्ण द्वितीया" },
+      { te: "కృష్ణ తదియ", en: "Krishna Tritiya", hi: "कृष्ण तृतीया" },
+      { te: "కృష్ణ చతుర్థి", en: "Krishna Chaturthi", hi: "कृष्ण चतुर्थी" },
+      { te: "కృష్ణ పంచమి", en: "Krishna Panchami", hi: "कृष्ण पंचमी" },
+      { te: "కృష్ణ షష్ఠి", en: "Krishna Shashthi", hi: "कृष्ण षष्ठी" },
+      { te: "కృష్ణ సప్తమి", en: "Krishna Saptami", hi: "कृष्ण सप्तमी" },
+      { te: "కృష్ణ అష్టమి", en: "Krishna Ashtami", hi: "कृष्ण अष्टमी" },
+      { te: "కృష్ణ నవమి", en: "Krishna Navami", hi: "कृष्ण नवमी" },
+      { te: "కృష్ణ దశమి", en: "Krishna Dashami", hi: "कृष्ण दशमी" },
+      { te: "కృష్ణ ఏకాదశి", en: "Krishna Ekadashi", hi: "कृष्ण एकादशी" },
+      { te: "కృష్ణ ద్వాదశి", en: "Krishna Dvadashi", hi: "कृष्ण द्वादशी" },
+      { te: "కృష్ణ త్రయోదశి", en: "Krishna Trayodashi", hi: "कृष्ण त्रयोदशी" },
+      { te: "కృష్ణ చతుర్దశి", en: "Krishna Chaturdashi", hi: "कृष्ण चतुर्दशी" },
+      { te: "అమావాస్య 🌑", en: "Amavasya 🌑", hi: "अमावस्या 🌑" }
     ];
 
-    // Add this master checklist reference database right after your puja list array
-const samagriDatabase = {
-  pujas: {
-    title_te: "పూజకు కావలసిన ముఖ్య సామాగ్రి",
-    title_en: "Essential Puja Samagri List",
-    title_hi: "पूजा के लिए आवश्यक सामग्री",
-    items_te: ["పసుపు, కుంకుమ, గంధం", "అక్షింతలు", "తమలపాకులు (25), వక్కలు", "కొబ్బరికాయలు (3)", "కర్పూరం, అగరబత్తీలు", "నారింజ/అరటి పండ్లు", "ఆవు పాలు, పెరుగు, నెయ్యి, తేనె", "చిల్లర నాణేలు", "కలశం రాగి/ఇత్తడి పాత్ర", "పూల మాలలు, విడి పూలు"],
-    items_en: ["Turmeric, Kumkum, Sandalwood", "Akshatala (Sacred Rice)", "Betel Leaves (25) & Betel Nuts", "Coconuts (3)", "Camphor & Incense Sticks", "Assorted Fresh Fruits", "Cow Milk, Curd, Ghee, Honey", "Loose Coins", "Copper/Brass Kalasam Pot", "Flower Garlands & Loose Flowers"],
-    items_hi: ["हल्दी, कुमकुम, चंदन", "अक्षत (पवित्र चावल)", "पान के पत्ते (25) और सुपारी", "नारियल (3)", "कपूर और अगरबत्ती", "ताजे फल", "गाय का दूध, दही, घी, शहद", "सिक्के", "तांबे/पीतल का कलश", "फूलों की माला और खुले फूल"]
-  },
-  homas: {
-    title_te: "హోమానికి కావలసిన ప్రత్యేక సామాగ్రి",
-    title_en: "Special Homam Materials Checklist",
-    title_hi: "हवन के लिए विशेष सामग्री सूची",
-    items_te: ["హోమ కుండం", "ఎండు కొబ్బరి చిప్పలు", "హోమ సమిధలు (రావి/మేడి కర్రలు)", "ఆవు నెయ్యి (1 కేజీ)", "హోమ ద్రవ్యం / మూలికల పొడి", "పూర్ణాహుతి పట్టు వస్త్రం", "నవధాన్యాలు (9 రకాల గింజలు)", "దర్భలు", "హారతి కర్పూరం", "కలశ వస్త్రం"],
-    items_en: ["Homam Kundam (Fire Altar)", "Dried Coconut Halves", "Homa Samidhulu (Sacred Wood)", "Pure Cow Ghee (1 Kg)", "Havan Samagri Herbs", "Purnahuti Silk Cloth", "Navadhanyam (9 Types of Grains)", "Darbha Grass", "Camphor for Arati", "Kalasam Cloth"],
-    items_hi: ["हवन कुंड", "सूखा नारियल", "हवन समिधा (पवित्र लकड़ी)", "शुद्ध गाय का घी (1 किलो)", "हवन सामग्री / जड़ी-बूटी", "पूर्णाहुति रेशमी कपड़ा", "नवधान्य (9 प्रकार के अनाज)", "दर्भ घास", "आरती कपूर", "कलश के लिए कपड़ा"]
-  },
-  navarathris: {
-    title_te: "నవరాత్రి పూజా ద్రవ్యములు",
-    title_en: "Navaratri Puja Specific Materials",
-    title_hi: "नवरात्रि पूजा विशेष सामग्री",
-    items_te: ["అమ్మవారి పటము లేదా విగ్రహం", "నవగ్రహ వస్త్రాలు (9 రంగులు)", "అఖండ దీపారాధన ప్రమిద", "నువ్వుల నూనె / ఆవు నెయ్యి", "కలశం పాత్ర & కొబ్బరికాయ", "పసుపు కొమ్ములు", "కుంకుమ (ఎరుపు/మెరూన్)", "గాజులు, తాంబూలం సెట్", "నైవేద్యానికి బెల్లం, రవ్వ", "రోజ్ వాటర్ (పన్నీరు)"],
-    items_en: ["Goddess Idol/Photo Frame", "Navagraha Clothes (9 Colors)", "Akhanda Deepam Lamp", "Sesame Oil / Cow Ghee", "Kalasam Pot & Coconut", "Turmeric Roots", "Kumkum (Deep Red)", "Glass Bangles & Tamboolam", "Jaggery & Suji for Naivedyam", "Rose Water"],
-    items_hi: ["माता की चौकी/मूर्ति", "नवग्रह वस्त्र (9 रंग)", "अखंड दीप पात्र", "तिल का तेल / गाय का घी", "कलश और नारियल", "हल्दी की गांठ", "कुमकुम", "कांच की चूड़ियाँ और तांबूल", "नैवेद्य के लिए गुड़ और सूजी", "गुलाब जल"]
-  },
-  vastu: {
-    title_te: "వాస్తు & గృహప్రవేశ సామాగ్రి",
-    title_en: "Vastu & Gruhapravesam Essentials",
-    title_hi: "वास्तु एवं गृह प्रवेश सामग्री",
-    items_te: ["వాస్తు పురుష ప్రతిమ (వెండి/రాగి)", "నవధాన్యాలు", "సింహద్వార తోరణం (మామిడి ఆకులు)", "గుమ్మడికాయ (తెలుపు)", "పాలు పొంగించడానికి కొత్త పాత్ర", "సున్నం, పసుపు (ముగ్గుల కొరకు)", "వాస్తు యంత్రం", "పంచగవ్య ద్రవ్యాలు", "ఇసుక (హోమ గుండం కింద వేయడానికి)", "బలి గుమ్మడికాయ"],
-    items_en: ["Vastu Purusha Idol (Silver/Copper)", "Navadhanyam Grains", "Mango Leaf Toranam for Main Door", "Ash Gourd (White Pumpkin)", "New Clay/Steel Pot for boiling milk", "Lime & Turmeric for Rangoli", "Vastu Yantram", "Panchagavyam Blend", "Fine Sand", "Sacrificial Pumpkin"],
-    items_hi: ["वास्तु पुरुष मूर्ति (चांदी/तांबा)", "नवधान्य", "आम के पत्तों का तोरण", "सफेद कद्दू", "दूध उबालने के लिए नया बर्तन", "रंगोली के लिए चूना और हल्दी", "वास्तु यंत्र", "पंचगव्य", "साफ रेत", "बलि के लिए पेठा कद्दू"]
-  },
-  shanti: {
-    title_te: "శాంతి & పితృకార్య ద్రవ్యములు",
-    title_en: "Shanthi & Ancestral Ritual Items",
-    title_hi: "शांति एवं पितृ कार्य सामग्री",
-    items_te: ["కృష్ణ తిలలు (నల్ల నువ్వులు)", "దర్భలు (ఎక్కువ పరిమాణంలో)", "బియ్యం పిండి", "పవిత్ర నదీ జలాలు", "సమిధలు", "వండిన అన్నం (పిండ ప్రదానానికి)", "తెల్లటి ధోవతి / వస్త్రాలు", "కూరగాయలు (స్వయంపాకం కొరకు)", "నెయ్యి", "దక్షిణ తాంబూలాలు"],
-    items_en: ["Black Sesame Seeds (Kala Til)", "Darbha Grass (Large Quantity)", "Rice Flour", "Sacred River Water (Ganga Jal)", "Sacred Fuel Sticks", "Cooked Rice for Pindam", "White Dhoti / Plain Clothes", "Fresh Vegetables for Danam", "Pure Ghee", "Dakshina Tamboolam Sets"],
-    items_hi: ["काले तिल", "दर्भ घास (अधिक मात्रा में)", "चावल का आटा", "गंगाजल / पवित्र जल", "हवन समिधा", "पिंड दान के लिए पके हुए चावल", "सफेद धोती / वस्त्र", "दान के लिए ताजी सब्जियां", "शुद्ध घी", "दक्षिणा तांबूल"]
-  },
-  samskaras: {
-    title_te: "సంస్కారాలు & వివాహ శుభ ద్రవ్యములు",
-    title_en: "Samskaras & Marriage Ceremony Items",
-    title_hi: "संस्कार और विवाह विवाह सामग्री",
-    items_te: ["జీలకర్ర బెల్లం ముద్ద", "మంగళసూత్రాలు", "మధుపర్కాలు (పెళ్ళి బట్టలు)", "తలంబ్రాల బియ్యం", "బారసాల గిన్నె/పట్టు వస్త్రం", "ఉపనయన జంధ్యాలు (యజ్ఞోపవీతం)", "బంగారు ముక్క (అన్నప్రాశనకు)", "కొత్త కత్తెర (చౌలం కొరకు)", "కలశ చెంబు", "కాళ్ళకు పసుపు (పారాణి)"],
-    items_en: ["Jeelakarra Bellam Paste", "Mangalasutrams", "Madhuparkam Outfits", "Talambralu Rice (Mixed with turmeric)", "Namakaranam Silk Sheet/Bowl", "Yajnopaveetam (Sacred Threads)", "Gold piece/ring (for Annaprasana)", "New Scissors (for Chaulam)", "Sacred Thread Ceremony Kalasam", "Paraani Paint / Turmeric for feet"],
-    items_hi: ["जीरा और गुड़ का पेस्ट", "मंगलसूत्र", "मधुपर्कम वस्त्र", "तलमब्रालु (हल्दी मिश्रित चावल)", "नामकरण के लिए रेशमी कपड़ा", "यज्ञोपवीत (जनेऊ)", "अन्नप्राशन के लिए सोने का टुकड़ा", "नई कैंची (मुंडन के लिए)", "उपनयन कलश", "पैरों के लिए महावर/हल्दी"]
-  }
-};
+    const nakshatraSequence = [
+      { te: "అశ్విని", en: "Ashwini", hi: "अश्विनी" }, { te: "భరణి", en: "Bharani", hi: "भरणी" },
+      { te: "కృత్తిక", en: "Krittika", hi: "कृत्तिका" }, { te: "రోహిణి", en: "Rohini", hi: "रोहिणी" },
+      { te: "మృగశిర", en: "Mrigashira", hi: "मृगशिरा" }, { te: "ఆరుద్ర", en: "Arudra", hi: "आर्द्रा" },
+      { te: "పునర్వసు", en: "Punarvasu", hi: "पुनर्वसु" }, { te: "పుష్యమి", en: "Pushya", hi: "पुष्य" },
+      { te: "ఆశ్లేష", en: "Aslesha", hi: "अश्लेषा" }, { te: "మఖ", en: "Magha", hi: "मघा" },
+      { te: "పూబ్బ", en: "Purva Phalguni", hi: "पूर्वाफाल्गुनी" }, { te: "ఉత్తర", en: "Uttara Phalguni", hi: "उत्तराफाल्गुनी" },
+      { te: "హస్త", en: "Hasta", hi: "हस्त" }, { te: "చిత్ర", en: "Chitra", hi: "चित्रा" },
+      { te: "స్వాతి", en: "Swati", hi: "स्वाति" }, { te: "విశాఖ", en: "Visakha", hi: "विशाखा" },
+      { te: "అనూరాధ", en: "Anuradha", hi: "अनुराधा" }, { te: "జ్యేష్ఠ", en: "Jyeshtha", hi: "ज्येष्ठा" },
+      { te: "మూల", en: "Mula", hi: "मूल" }, { te: "పూర్వాషాఢ", en: "Purvashadha", hi: "पूर्वाषाढ़ा" },
+      { te: "ఉత్తరాషాఢ", en: "Uttarashadha", hi: "उत्तराषाढ़ा" }, { te: "శ్రవణం", en: "Shravana", hi: "श्रवण" },
+      { te: "ధనిష్ఠ", en: "Dhanishta", hi: "धनिष्ठा" }, { te: "శతభిషం", en: "Shatabhisha", hi: "शतभिषा" },
+      { te: "పూరభాద్ర", en: "Purva Bhadrapada", hi: "पूर्वभाद्रपद" }, { te: "ఉత్తరాభాద్ర", en: "Uttara Bhadrapada", hi: "उत्तरभाद्रपद" },
+      { te: "రేవతి", en: "Revati", hi: "रेवती" }
+    ];
 
-    const localization = {
+    // High Priority Fixed Holy Festivals Calendar Data
+    const localCalendar2026Database = {
+      "2026-01-01": { te: "ప్రదోష వ్రతం 🌟 (ఆంగ్ల నూతనసంవత్సరం)", en: "Pradosha Vratam 🌟 (New Year)", hi: "प्रदोष व्रत 🌟" },
+      "2026-01-03": { te: "శ్రీ సత్యనారాయణ పూజ, వ్రతం 🔱", en: "Sri Satyanarayana Swamy Vratam 🔱", hi: "श्री सत्यनारायण व्रत 🔱" },
+      "2026-01-08": { te: "సంకటహర చతుర్థి 🌙", en: "Sankatahara Chaturthi Vratam 🌙", hi: "संकष्ट चतुर्थी व्रत 🌙" },
+      "2026-02-15": { te: "మహా శివరాత్రి పర్వదినం 🕉️", en: "Maha Shivaratri Festival 🕉️", hi: "महा शिवरात्रि पर्व 🕉️" },
+      "2026-03-19": { te: "ఉగాది పండుగ 🌿 (నల నామ సంవత్సర ప్రారంభం)", en: "Ugadi Festival 🌿", hi: "उगादी पर्व 🌿" },
+      "2026-03-27": { te: "శ్రీరామ నవమి ఉత్సవం 🏹", en: "Sri Rama Navami 🏹", hi: "श्री राम नवमी 🏹" },
+      "2026-05-14": { te: "హనుమజ్జయంతి మహోత్సవం", en: "Hanuman Jayanthi Festival 🐒", hi: "हनुमान जयंती 🐒" },
+      "2026-08-15": { te: "స్వాతంత్ర్య దినోత్సవం 🇮🇳 / కృష్ణాష్టమి 🍯", en: "Independence Day / Krishna Janmashtami 🍯", hi: "स्वतंत्रता दिवस / कृष्ण जन्माष्टमी 🍯" },
+      "2026-08-28": { te: "వరలక్ష్మి వ్రతం 🌸", en: "Varalakshmi Vratam 🌸", hi: "वरलक्ष्मी व्रत 🌸" },
+      "2026-09-14": { te: "వినాయక చవితి పండుగ", en: "Vinayaka Chavithi 🐘", hi: "गणेश चतुर्थी 🐘" },
+      "2026-10-20": { te: "విజయదశమి / దసరా 🏹", en: "Vijayadasami / Dasara 🏹", hi: "दशहरा 🏹" },
+      "2026-11-08": { te: "దీపావళి లక్ష్మి పూజ 🪔", en: "Deepavali Lakshmi Puja 🪔", hi: "दीपावली लक्ष्मी पूजा 🪔" }
+    };
+
+    const staticPujasArray = [
+      { id: "p1", category: "pujas", te: "శ్రీ సత్యనారాయణ స్వామి వ్రతం", hi: "श्री सत्यनारायण व्रत", en: "Sri Satyanarayana Swamy Vratam" },
+      { id: "p2", category: "pujas", te: "శ్రీ మహాలక్ష్మి వ్రత పూజ", hi: "श्री महालक्ष्मी पूजा", en: "Sri Maha Lakshmi Vratam" },
+      { id: "p3", category: "pujas", te: "శ్రీ వినాయక చవితి పూజ", hi: "श्री गणेश चतुर्थी पूजा", en: "Sri Vinayaka Chavithi Puja" },
+      { id: "h1", category: "homas", te: "శ్రీ గణపతి హోమం", hi: "श्री गणपति होमम", en: "Sri Ganapathi Homam" },
+      { id: "h2", category: "homas", te: "నవగ్రహ శాంతి హోమం", hi: "नवग्रह होमम", en: "Navagraha Shanti Homam" },
+      { id: "v1", category: "vastu", te: "నూతన గృహప్రవేశ పూజ / వాస్తు బలి", hi: "गृह प्रवेश एवं वास्तु पूजा", en: "Gruhapravesam & Vastu Puja" }
+    ];
+
+    const localizationDict = {
       te: {
-        navTitle: "వేదిక్ పాత్", heroTitle: "శాస్త్రోక్త వేద సేవలు", heroText: "తెలంగాణ ప్రాంతీయ పంచాంగం మరియు వైదిక పూజా సమాచారం",
-  panchangHeading: "ఈరోజు పంచాంగం", horoscopeHeading: "నేటి రాశి ఫలాలు", pujasTabHeading: "వైదిక పూజా కార్యక్రమాలు",
-        tithiHeading: "తిథి", nakshatraHeading: "నక్షత్రం", sunriseHeading: "సూర్యోదయం", sunsetHeading: "సూర్యాస్తమయం",
-        shubhaMuhurthamHeading: "శుభ ముహూర్తం", rahuHeading: "రాహుకాలం", durmuhurthamHeading: "దుర్ముహూర్తం", yamagandamHeading: "యమగండం",
-        contactHeading: "సంప్రదించండి", callText: "ఫోన్ చేయండి", whatsappText: "వాట్సాప్ సందేశం", locationText: "చిరునామా",
-        locationValue: `<a href="https://maps.app.goo.gl/cM4JS6JZC5hqharRA" target="_blank" class="hover:underline text-amber-200 inline-flex items-center gap-1"><i class="fa-solid fa-map-location-dot"></i> వరంగల్, తెలంగాణ</a>`,
-        bookBtn: "వివరాల కొరకు కాల్ చేయండి",
+        navTitle: "వేదిక్ పాత్", navSubtitle: "జంగం బద్రయ్య ఆయగారు", heroTitle: "శాస్త్రోక్త వేద సేవలు", heroText: "తెలంగాణ ప్రాంతీయ క్యాలెండర్ మరియు వైదిక పూజా సమాచారం",
+        calendarHeading: "క్యాలెండర్ & పండుగలు", pujasTabHeading: "వైదిక పూజా కార్యక్రమాలు",
+        callText: "ఫోన్ చేయండి", whatsappText: "వాట్సాప్ సందేశం", locationText: "చిరునామా",
+        bookBtn: "సంప్రదించండి", badgeToday: "నేటి వివరణ", badgeDayText: "ఎంచుకున్న రోజు ప్రాముఖ్యత",
+        lblPrev: "వెనుకకు", lblNext: "ముందుకు", lblTodayBtn: "నేడు",
+        lblSunrise: "సూర్యోదయం", lblSunset: "సూర్యాస్తమయం", lblTithi: "తిథి", lblNakshatra: "నక్షత్రం", lblRahu: "రాహుకాలం", lblYama: "యమగండం",
+        noFestivals: "ఈ రోజు ఎటువంటి ప్రత్యేక పండుగలు లేదా విశేష తిథులు లేవు. సాధారణ దినము.",
         months: ["జనవరి", "ఫిబ్రవరి", "మార్చి", "ఏప్రిల్", "మే", "జూన్", "జూలై", "ఆగస్టు", "సెప్టెంబర్", "అక్టోబర్", "నవంబర్", "డిసెంబర్"],
-        tithiVal: "పాడ్యమి (ప్రథమ తిథి)", nakshatraVal: "కృత్తిక (మధ్యాహ్నం 02:31 తర్వాత రోహిణి)",
-        lunarNewMoon: "అమావాస్య", lunarPadyami: "పాడ్యమి"
+        weekdays: ["ఆది", "సోమ", "మంగళ", "బుధ", "గురు", "శుక్ర", "శని"],
+        tabs: {
+          pujas: "పూజలు & వ్రతాలు", homas: "హోమాలు", navarathris: "నవరాత్రి ఉత్సవాలు",
+          vastu: "వాస్తు పూజలు", shanti: "శాంతి ప్రక్రియలు", samskaras: "సంస్కారాలు"
+        }
       },
       en: {
-        navTitle: "Vedic Path", heroTitle: "Vedic Ritual Services", heroText: "Telangana Regional Panchangam & Vedic Puja Guide",
-        panchangHeading: "Today's Panchangam", horoscopeHeading: "Daily Horoscope", pujasTabHeading: "Vedic Pujas & Ceremonies",
-        tithiHeading: "Tithi", nakshatraHeading: "Nakshatram", sunriseHeading: "Sunrise", sunsetHeading: "Sunset",
-        shubhaMuhurthamHeading: "Auspicious Time", rahuHeading: "Rahu Kaal", durmuhurthamHeading: "Durmuhurtham", yamagandamHeading: "Yamagandam",
-        contactHeading: "Contact Us", callText: "Call Us", whatsappText: "WhatsApp Chat", locationText: "Address",
-        locationValue: `<a href="https://maps.app.goo.gl/cM4JS6JZC5hqharRA" target="_blank" class="hover:underline text-amber-200 inline-flex items-center gap-1"><i class="fa-solid fa-map-location-dot"></i> Warangal, Telangana</a>`,
-        bookBtn: "Call to Enquire",
+        navTitle: "Vedic Path", navSubtitle: "Jangam Badraiah Ayyagaru", heroTitle: "Vedic Ritual Services", heroText: "Telangana Regional Calendar & Vedic Puja Guide",
+        calendarHeading: "Calendar & Festivals", pujasTabHeading: "Vedic Pujas & Ceremonies",
+        callText: "Call Us", whatsappText: "WhatsApp Chat", locationText: "Address",
+        bookBtn: "Call Priest", badgeToday: "Today's View", badgeDayText: "Selected Day Significance",
+        lblPrev: "Previous", lblNext: "Next", lblTodayBtn: "Today",
+        lblSunrise: "Sunrise", lblSunset: "Sunset", lblTithi: "Tithi", lblNakshatra: "Nakshatram", lblRahu: "Rahu Kalam", lblYama: "Yamagandam",
+        noFestivals: "No special festivals or specific calendar events recorded for this date.",
         months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        tithiVal: "Pratipada (Padyami)", nakshatraVal: "Krittika (and after 02:31 PM Rohini)",
-        lunarNewMoon: "Amavasya (New Moon)", lunarPadyami: "Pratipada (Padyami)"
+        weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        tabs: {
+          pujas: "Pujas & Vratams", homas: "Homams", navarathris: "Navaratri Celebrations",
+          vastu: "Vastu Pujas", shanti: "Shanti Rituals", samskaras: "Samskaras"
+        }
       },
       hi: {
-        navTitle: "वैदिक पाथ", heroTitle: "शास्त्रोक्त वैदिक सेवाएं", heroText: "तेलंगाना क्षेत्रीय पंचांग और वैदिक पूजा जानकारी",
-        panchangHeading: "आज का पंचांग", horoscopeHeading: "आज का राशिफल", pujasTabHeading: "वैदिक पूजा एवं अनुष्ठान",
-        tithiHeading: "तिथि", nakshatraHeading: "नक्षत्र", sunriseHeading: "सूर्योदय", sunsetHeading: "सूर्यास्त",
-        shubhaMuhurthamHeading: "शुभ मुहूर्त", rahuHeading: "राहु काल", durmuhurthamHeading: "दुर्मुहूर्त", yamagandamHeading: "यमगंडम",
-        contactHeading: "संपर्क करें", callText: "फ़ोन करें", whatsappText: "व्हाट्सएप चैट", locationText: "पता",
-        locationValue: `<a href="https://maps.app.goo.gl/cM4JS6JZC5hqharRA" target="_blank" class="hover:underline text-orange-300"><i class="fa-solid fa-map-location-dot"></i> वारंगल, तेलंगाना (दक्षिण भारत)</a>`,
-        bookBtn: "पूछताछ के लिए कॉल करें",
-        months: ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"],
-        tithiVal: "प्रतिपदा (पाड्यमी)", nakshatraVal: "कृत्तिका (और दोपहर 02:31 के बाद रोहिणी)",
-        lunarNewMoon: "अमावस्या", lunarPadyami: "प्रतिपदा"
+        navTitle: "वैदिक पाथ", navSubtitle: "जंगम भद्रैया अय्यागारू", heroTitle: "शास्त्रोक्त वैदिक सेवाएं", heroText: "तेलंगाना क्षेत्रीय कैलेंडर और वैदिक पूजा जानकारी",
+        calendarHeading: "कैलेंडर और त्यौहार", pujasTabHeading: "वैदिक पूजा एवं अनुष्ठान",
+        callText: "फ़ोन करें", whatsappText: "व्हाट्सएप चैट", locationText: "पता",
+        bookBtn: "सम्पर्क करें", badgeToday: "आज का विवरण", badgeDayText: "चयनित दिन का महत्व",
+        lblPrev: "पिछला", lblNext: "अगला", lblTodayBtn: "आज",
+        lblSunrise: "सूर्योदय", lblSunset: "सूर्यास्त", lblTithi: "तिथि", lblNakshatra: "नक्षत्र", lblRahu: "राहु काल", lblYama: "यमगंडम",
+        noFestivals: "इस तिथि के लिए कोई विशेष त्योहार उपलब्ध नहीं है।",
+        months: ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "ननवंबर", "दिसंबर"],
+        weekdays: ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"],
+        tabs: {
+          pujas: "पूजा और व्रत", homas: "होमम (हवन)", navarathris: "नवरात्रि उत्सव",
+          vastu: "वास्तु पूजा", shanti: "शांति अनुष्ठान", samskaras: "संस्कार"
+        }
       }
     };
 
-    function changeLanguage(lang) {
-      currentLanguage = lang;
-      
-      document.getElementById("navTitle").innerText = localization[lang].navTitle;
-      document.getElementById("heroTitle").innerText = localization[lang].heroTitle;
-      document.getElementById("heroText").innerText = localization[lang].heroText;
-      document.getElementById("panchangHeading").innerText = localization[lang].panchangHeading;
-      document.getElementById("horoscopeHeading").innerText = localization[lang].horoscopeHeading;
-      document.getElementById("pujasTabHeading").innerText = localization[lang].pujasTabHeading;
-      
-      document.getElementById("tithiHeading").innerText = localization[lang].tithiHeading;
-      document.getElementById("nakshatraHeading").innerText = localization[lang].nakshatraHeading;
-      document.getElementById("sunriseHeading").innerText = localization[lang].sunriseHeading;
-      document.getElementById("sunsetHeading").innerText = localization[lang].sunsetHeading;
-      document.getElementById("shubhaMuhurthamHeading").innerText = localization[lang].shubhaMuhurthamHeading;
-      document.getElementById("rahuHeading").innerText = localization[lang].rahuHeading;
-      document.getElementById("durmuhurthamHeading").innerText = localization[lang].durmuhurthamHeading;
-      document.getElementById("yamagandamHeading").innerText = localization[lang].yamagandamHeading;
-      
-      document.getElementById("contactHeading").innerText = localization[lang].contactHeading;
-      document.getElementById("callText").innerText = localization[lang].callText;
-      document.getElementById("whatsappText").innerText = localization[lang].whatsappText;
-      document.getElementById("locationText").innerText = localization[lang].locationText;
-      document.getElementById("locationValue").innerHTML = localization[lang].locationValue;
+    // Advanced Ephemeris Epoch Anchor Panchang Engine
+    function calculateAdvancedPanchang(targetDate) {
+      // Anchor Base Alignment: May 27, 2026 -> Shukla Dwadashi (Index 11), Chitra Nakshatram (Index 13)
+      const anchorDate = new Date(2026, 4, 27); 
+      const differenceTime = targetDate - anchorDate;
+      const differenceDays = Math.floor(differenceTime / (1000 * 60 * 60 * 24));
 
-      document.getElementById("tithi").innerText = localization[lang].tithiVal;
-      document.getElementById("nakshatram").innerText = localization[lang].nakshatraVal;
+      let tithiIndex = (11 + differenceDays) % 30;
+      if (tithiIndex < 0) tithiIndex += 30;
 
-      // Tab Buttons translations
-      document.getElementById("btn-pujas").innerText = lang === "te" ? "శుభ పూజలు & వ్రతాలు" : (lang === "hi" ? "शुभ पूजा और व्रत" : "Auspicious Pujas");
-      document.getElementById("btn-homas").innerText = lang === "te" ? "హోమాలు & అభిషేకాలు" : (lang === "hi" ? "हवन और अभिषेक" : "Homams & Abhishekams");
-      document.getElementById("btn-navarathris").innerText = lang === "te" ? "నవరాత్రి ఉత్సవాలు" : (lang === "hi" ? "नवरात्रि उत्सव" : "Navaratri Utsavas");
-      document.getElementById("btn-vastu").innerText = lang === "te" ? "వాస్తు పూజలు" : (lang === "hi" ? "वास्तु पूजा" : "Vastu Pujas");
-      document.getElementById("btn-shanti").innerText = lang === "te" ? "శాంతి / పితృకార్యాలు" : (lang === "hi" ? "शांति / पितृ कर्म" : "Shanthi / Ancestral");
-      document.getElementById("btn-samskaras").innerText = lang === "te" ? "సంస్కారాలు & కర్మలు" : (lang === "hi" ? "संस्कार और कर्म" : "Samskaras & Karmas");
+      let naksIndex = (13 + differenceDays) % 27;
+      if (naksIndex < 0) naksIndex += 27;
 
-      renderSigns();
-      renderActivePujaList();
-      renderIntegratedCalendar();
+      // Solar variation calculation for sunrise/sunset values
+      const startOfYear = new Date(targetDate.getFullYear(), 0, 1);
+      const dayOfYear = Math.floor((targetDate - startOfYear) / (1000 * 60 * 60 * 24)) + 1;
+      
+      const varianceMinutes = Math.round(16 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365));
+      const baseSunriseMinutes = 5 * 60 + 44; 
+      const baseSunsetMinutes = 18 * 60 + 42; 
+
+      const targetSunrise = baseSunriseMinutes + varianceMinutes;
+      const targetSunset = baseSunsetMinutes - varianceMinutes;
+
+      const timeFormatter = (totalMin) => {
+        let hrs = Math.floor(totalMin / 60);
+        let mins = totalMin % 60;
+        let period = hrs >= 12 ? "PM" : "AM";
+        hrs = hrs > 12 ? hrs - 12 : hrs === 0 ? 12 : hrs;
+        return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')} ${period}`;
+      };
+
+      const dayOfWeek = targetDate.getDay();
+      const rahuTimes = [
+        "04:30 PM - 06:00 PM", "07:30 AM - 09:00 AM", "03:00 PM - 04:30 PM",
+        "12:00 PM - 01:30 PM", "01:30 PM - 03:00 PM", "10:30 AM - 12:00 PM", "09:00 AM - 10:30 AM"
+      ];
+      const yamaTimes = [
+        "12:00 PM - 01:30 PM", "10:30 AM - 12:00 PM", "09:00 AM - 10:30 AM",
+        "07:30 AM - 09:00 AM", "06:00 AM - 07:30 AM", "03:00 PM - 04:30 PM", "01:30 PM - 03:00 PM"
+      ];
+
+      return {
+        sunrise: timeFormatter(targetSunrise),
+        sunset: timeFormatter(targetSunset),
+        tithi: tithiSequence[tithiIndex],
+        nakshatra: nakshatraSequence[naksIndex],
+        rahu: rahuTimes[dayOfWeek],
+        yama: yamaTimes[dayOfWeek]
+      };
     }
 
-    function renderSigns() {
-      const grid = document.getElementById("horoscopeGrid");
-      grid.innerHTML = "";
-      signs.forEach(s => {
-        grid.innerHTML += `
-          <div class="horoscope-card" onclick="openHoroscopeDialog('${s.en.toLowerCase()}', '${s[currentLanguage]}')">
-            <div class="sign-icon">${s.icon}</div>
-            <h3 class="text-lg font-bold text-orange-950">${s[currentLanguage]}</h3>
-          </div>
-        `;
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      const dict = localizationDict[lang];
+      
+      document.getElementById("navTitle").innerText = dict.navTitle;
+      document.getElementById("navSubtitle").innerText = dict.navSubtitle;
+      document.getElementById("heroTitle").innerText = dict.heroTitle;
+      document.getElementById("heroText").innerText = dict.heroText;
+      document.getElementById("calendarHeading").innerText = dict.calendarHeading;
+      document.getElementById("pujasTabHeading").innerText = dict.pujasTabHeading;
+      document.getElementById("callText").innerText = dict.callText;
+      document.getElementById("whatsappText").innerText = dict.whatsappText;
+      document.getElementById("locationText").innerText = dict.locationText;
+      
+      document.getElementById("lblPrev").innerText = dict.lblPrev;
+      document.getElementById("lblNext").innerText = dict.lblNext;
+      document.getElementById("lblTodayBtn").innerText = dict.lblTodayBtn;
+
+      document.getElementById("lblSunrise").innerText = dict.lblSunrise;
+      document.getElementById("lblSunset").innerText = dict.lblSunset;
+      document.getElementById("lblTithi").innerText = dict.lblTithi;
+      document.getElementById("lblNakshatra").innerText = dict.lblNakshatra;
+      document.getElementById("lblRahu").innerText = dict.lblRahu;
+      document.getElementById("lblYama").innerText = dict.lblYama;
+
+      // Category Tabs Translatability Engine Realignment
+      document.getElementById("btn-pujas").innerText = dict.tabs.pujas;
+      document.getElementById("btn-homas").innerText = dict.tabs.homas;
+      document.getElementById("btn-navarathris").innerText = dict.tabs.navarathris;
+      document.getElementById("btn-vastu").innerText = dict.tabs.vastu;
+      document.getElementById("btn-shanti").innerText = dict.tabs.shanti;
+      document.getElementById("btn-samskaras").innerText = dict.tabs.samskaras;
+
+      renderActivePujaList();
+      renderIntegratedCalendar();
+      updateDailyViewBanner();
+    }
+
+    function handleLanguageSwitch(lang, event) {
+      document.querySelectorAll(".lang-btn").forEach(b => {
+        b.classList.remove("bg-[#ea580c]");
+        b.classList.add("bg-orange-800");
       });
+      if (event && event.target) {
+        event.target.classList.add("bg-[#ea580c]");
+        event.target.classList.remove("bg-orange-800");
+      } else {
+        const targetBtn = document.getElementById(`lang-btn-${lang}`);
+        if(targetBtn) {
+          targetBtn.classList.add("bg-[#ea580c]");
+          targetBtn.classList.remove("bg-orange-800");
+        }
+      }
+      changeLanguage(lang);
     }
 
     function switchPujaTab(category) {
       activeTab = category;
-      document.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
-      document.getElementById(`btn-${category}`).classList.add("active");
+      document.querySelectorAll("[role='tablist'] button").forEach(btn => {
+        btn.classList.remove("bg-[#ea580c]", "text-white", "shadow-sm");
+        btn.classList.add("hover:bg-orange-100");
+      });
+      const activeBtn = document.getElementById(`btn-${category}`);
+      activeBtn.classList.add("bg-[#ea580c]", "text-white", "shadow-sm");
+      activeBtn.classList.remove("hover:bg-orange-100");
       renderActivePujaList();
     }
 
     function renderActivePujaList() {
-  const container = document.getElementById("pujaDynamicList");
-  container.innerHTML = "";
-  
-  const filtered = kalpataruvuPujaList.filter(p => p.category === activeTab);
-  
-  filtered.forEach(p => {
-    const displayName = currentLanguage === "te" ? p.name_te : (currentLanguage === "hi" ? p.name_hi : p.name_en);
-    const samagriLabel = currentLanguage === "te" ? "సామాగ్రి జాబితా" : (currentLanguage === "hi" ? "सामग्री सूची" : "View Samagri");
-    
-    container.innerHTML += `
-      <div class="puja-item-row flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h4 class="text-lg font-bold text-gray-800">${displayName}</h4>
-          <p class="text-xs text-orange-600 font-semibold uppercase tracking-wider">${p.category}</p>
-        </div>
-        <div class="flex flex-wrap gap-2 w-full sm:w-auto">
-          <button onclick="openSamagriModal('${p.category}')" class="bg-amber-100 text-amber-900 text-xs md:text-sm px-4 py-2 rounded-xl font-bold border border-amber-300 hover:bg-amber-200 transition">
-            <i class="fa-solid fa-list-check mr-1"></i> ${samagriLabel}
-          </button>
-          <a href="tel:+91will update soon" class="bg-orange-600 text-white text-xs md:text-sm px-4 py-2 rounded-xl font-bold hover:bg-orange-700 transition inline-flex items-center">
-            <i class="fa-solid fa-phone mr-1"></i> ${localization[currentLanguage].bookBtn}
-          </a>
-        </div>
-      </div>
-    `;
-  });
-}
+      const container = document.getElementById("pujaDynamicList");
+      if(!container) return;
+      container.innerHTML = "";
+      
+      const filtered = staticPujasArray.filter(p => p.category === activeTab);
+      filtered.forEach(p => {
+        container.innerHTML += `
+          <div class="flex justify-between items-center py-4 px-2 hover:bg-orange-50/50 transition rounded-xl">
+            <h4 class="text-base font-semibold text-gray-800">${p[currentLanguage] || p['te']}</h4>
+            <a href="tel:+919999999999" class="bg-[#ea580c] text-white text-xs px-4 py-2 rounded-xl font-bold hover:bg-[#c2410c] transition shadow-sm flex items-center gap-1">
+              <i class="fa-solid fa-phone text-[10px]"></i> ${localizationDict[currentLanguage].bookBtn}
+            </a>
+          </div>
+        `;
+      });
+    }
 
     function renderIntegratedCalendar() {
       const grid = document.getElementById("calendarGrid");
+      if(!grid) return;
       grid.innerHTML = "";
       
-      const dayNames = currentLanguage === "te" ? ["ఆది", "సోమ", "మంగళ", "బుధ", "గురు", "శుక్ర", "శని"] : 
-                       (currentLanguage === "hi" ? ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"] : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
-      
-      dayNames.forEach(d => {
-        grid.innerHTML += `<div class="calendar-day-name">${d}</div>`;
+      const dict = localizationDict[currentLanguage];
+      dict.weekdays.forEach(dayName => {
+        grid.innerHTML += `<div class="font-bold text-xs md:text-sm text-[#7c2d12] bg-orange-100/60 py-2 rounded-lg">${dayName}</div>`;
       });
 
-      const year = calendarDate.getFullYear();
-      const month = calendarDate.getMonth();
-      document.getElementById("calendarMonthTitle").innerText = `${localization[currentLanguage].months[month]} ${year}`;
+      const year = calendarMonthPointer.getFullYear();
+      const month = calendarMonthPointer.getMonth();
+      document.getElementById("calendarMonthTitle").innerText = `${dict.months[month]} ${year}`;
 
       const firstDayIndex = new Date(year, month, 1).getDay();
       const totalDaysActual = new Date(year, month + 1, 0).getDate();
 
-      for(let i=0; i<firstDayIndex; i++) {
-        grid.innerHTML += `<div class="calendar-cell bg-transparent border-none"></div>`;
+      for (let i = 0; i < firstDayIndex; i++) {
+        grid.innerHTML += `<div class="bg-transparent border-none"></div>`;
       }
 
-      for(let day=1; day<=totalDaysActual; day++) {
-        let isToday = (day === 17 && month === 4 && year === 2026);
-        let isYesterday = (day === 16 && month === 4 && year === 2026);
+      for (let day = 1; day <= totalDaysActual; day++) {
+        const isCurrentlySelected = day === activeDatePointer.getDate() && month === activeDatePointer.getMonth() && year === activeDatePointer.getFullYear();
+        const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         
-        let lunarTxt = "";
-        if(isToday) {
-          lunarTxt = localization[currentLanguage].lunarPadyami;
-        } else if(isYesterday) {
-          lunarTxt = localization[currentLanguage].lunarNewMoon;
-        } else {
-          lunarTxt = "తిథి";
+        let festivalMarkup = "";
+        if(localCalendar2026Database[dateKey]) {
+          const titleText = localCalendar2026Database[dateKey][currentLanguage] || localCalendar2026Database[dateKey]["te"];
+          festivalMarkup = `
+            <span class="w-full text-[10px] bg-orange-100 text-[#9a3412] font-bold px-1.5 py-0.5 rounded border border-orange-200 block truncate text-left mt-1" title="${titleText}">
+              ${titleText}
+            </span>`;
         }
 
         grid.innerHTML += `
-          <div class="calendar-cell ${isToday ? 'today' : ''}">
-            <span class="cell-date">${day}</span>
-            <span class="cell-lunar">${lunarTxt}</span>
+          <div onclick="selectCalendarCell(${day})" class="p-2 border rounded-xl flex flex-col justify-between items-start min-h-[75px] md:min-h-[90px] transition-all duration-150 cursor-pointer ${isCurrentlySelected ? 'bg-orange-600 border-orange-600 text-white shadow-md scale-[1.02] z-10' : 'bg-orange-50/30 border-orange-100 hover:bg-orange-100/60'}" id="cell-day-${day}">
+            <span class="font-bold text-sm md:text-base ${isCurrentlySelected ? 'text-white' : 'text-gray-900'}">${day}</span>
+            ${festivalMarkup}
           </div>
         `;
       }
     }
 
-    function moveMonth(offset) {
-      calendarDate.setMonth(calendarDate.getMonth() + offset);
+    function stepActiveDay(daysOffset) {
+      activeDatePointer.setDate(activeDatePointer.getDate() + daysOffset);
+      calendarMonthPointer.setFullYear(activeDatePointer.getFullYear());
+      calendarMonthPointer.setMonth(activeDatePointer.getMonth());
+      
+      updateDailyViewBanner();
       renderIntegratedCalendar();
     }
 
-    function openSamagriModal(category) {
-      const targetData = samagriDatabase[category];
-      if (!targetData) return;
-
-      const title = currentLanguage === "te" ? targetData.title_te : (currentLanguage === "hi" ? targetData.title_hi : targetData.title_en);
-      const items = currentLanguage === "te" ? targetData.items_te : (currentLanguage === "hi" ? targetData.items_hi : targetData.items_en);
+    function selectCalendarCell(dayNumber) {
+      activeDatePointer.setFullYear(calendarMonthPointer.getFullYear());
+      activeDatePointer.setMonth(calendarMonthPointer.getMonth());
+      activeDatePointer.setDate(dayNumber);
       
-      // 1. Set the Header title dynamically
-      document.getElementById("modalTitle").innerText = title;
-      
-      // 2. Build the interactive checkbox checklist list markup
-      let listHtml = `<ul class="space-y-3 mt-4 text-left max-h-[55vh] overflow-y-auto pr-2">`;
-      items.forEach(item => {
-        listHtml += `
-          <li class="flex items-center gap-3 bg-orange-50 p-3 rounded-xl border border-orange-100 font-medium text-gray-800">
-            <input type="checkbox" class="w-5 h-5 accent-orange-600 rounded cursor-pointer">
-            <span class="text-base select-none">${item}</span>
-          </li>`;
-      });
-      listHtml += `</ul>`;
-      
-      // 3. Inject into the shared dialog wrapper and reveal the display modal
-      document.getElementById("modalText").innerHTML = listHtml;
-      openModal();
+      updateDailyViewBanner();
+      renderIntegratedCalendar();
     }
 
-    function openModal() {
-      document.getElementById("horoscopeModal").style.display = "flex";
-    }
-
-    function closeModal() {
-      document.getElementById("horoscopeModal").style.display = "none";
-    }
-
-    async function openHoroscopeDialog(sign, name) {
-      document.getElementById("modalTitle").innerText = name;
-      document.getElementById("modalText").innerText = "Loading Daily Horoscope...";
-      openModal();
+    function resetToToday() {
+      const rightNow = new Date();
+      activeDatePointer = new Date(rightNow.getFullYear(), rightNow.getMonth(), rightNow.getDate());
+      calendarMonthPointer = new Date(rightNow.getFullYear(), rightNow.getMonth(), 1);
       
-      try {
-        const response = await fetch(`https://api.api-ninjas.com/v1/horoscope?zodiac=${sign}`, {
-          method: "GET",
-          headers: { "X-Api-Key": "YOUR_API_KEY" }
-        });
-        const data = await response.json();
-        let horoscopeText = data.horoscope || "No Horoscope Available";
-        
-        if(currentLanguage !== "en") {
-          const transUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${currentLanguage}&dt=t&q=${encodeURIComponent(horoscopeText)}`;
-          const transRes = await fetch(transUrl);
-          const transData = await transRes.json();
-          if (transData && transData[0]) {
-            horoscopeText = transData[0].map(item => item[0]).join("");
-          }
-        }
-        document.getElementById("modalText").innerText = horoscopeText;
-      } catch (error) {
-        document.getElementById("modalText").innerText = currentLanguage === "te" ? "రాశిఫలాల సమాచారం ప్రస్తుతం అందుబాటులో లేదు." : "Horoscope data is currently unavailable.";
+      updateDailyViewBanner();
+      renderIntegratedCalendar();
+    }
+
+    function moveMonth(offset) {
+      calendarMonthPointer.setMonth(calendarMonthPointer.getMonth() + offset);
+      renderIntegratedCalendar();
+    }
+
+    function updateDailyViewBanner() {
+      const dict = localizationDict[currentLanguage];
+      const year = activeDatePointer.getFullYear();
+      const month = activeDatePointer.getMonth();
+      const day = activeDatePointer.getDate();
+      
+      const isToday = day === todayInstance.getDate() && month === todayInstance.getMonth() && year === todayInstance.getFullYear();
+      
+      document.getElementById("quickDayBadge").innerText = isToday ? dict.badgeToday : dict.badgeDayText;
+      document.getElementById("quickDayTitle").innerText = `${dict.months[month]} ${day}, ${year}`;
+
+      const lookupKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      
+      // Compute dynamic astrological metrics
+      const dynamicCalculatedPanchang = calculateAdvancedPanchang(activeDatePointer);
+      
+      document.getElementById("valSunrise").innerText = dynamicCalculatedPanchang.sunrise;
+      document.getElementById("valSunset").innerText = dynamicCalculatedPanchang.sunset;
+      document.getElementById("valTithi").innerText = dynamicCalculatedPanchang.tithi[currentLanguage];
+      document.getElementById("valNakshatra").innerText = dynamicCalculatedPanchang.nakshatra[currentLanguage];
+      document.getElementById("valRahu").innerText = dynamicCalculatedPanchang.rahu;
+      document.getElementById("valYama").innerText = dynamicCalculatedPanchang.yama;
+
+      const staticFestival = localCalendar2026Database[lookupKey];
+      if(staticFestival) {
+        document.getElementById("quickDayDetails").innerText = staticFestival[currentLanguage] || staticFestival["te"];
+      } else {
+        document.getElementById("quickDayDetails").innerText = dict.noFestivals;
       }
     }
 
-    window.onload = () => {
-      changeLanguage("te");
-    };
+    document.addEventListener("DOMContentLoaded", () => {
+      handleLanguageSwitch("te", null);
+    });
   </script>
 </body>
 </html>
